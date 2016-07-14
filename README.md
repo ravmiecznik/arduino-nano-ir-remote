@@ -10,3 +10,5 @@ sudo apt-get install xdotol.
 Refer to man xdotol for reference.
 
 Simplified connection diagram is attached in the project as diagram.jpg.
+Infrared sensor is TSOP1736 and some random remote control I have from PC DVBT tuner (any other should work but detection of key codes is necessary)
+
