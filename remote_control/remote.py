@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 __author__ = 'rafal'
 
 import subprocess
@@ -20,6 +21,13 @@ class Remote():
     def _serial_connection(self, p, b):
         return serial.Serial(port=p, baudrate=b)
 
+    def create_xdotol_command(self, key):
+        xdotool_cmd = None
+        if 'power_off' in key:
+            xdotool_cmd = ("systemctl", "poweroff")
+        return xdotool_cmd
+
+
     def xdotool_change_desktop(self, key):
         current_desk = self.current_desk
         if not current_desk:
@@ -36,10 +44,13 @@ class Remote():
         return ["xdotool", "set_desktop", str(current_desk)]
 
     def key_handler(self, key):
+        action = None
         if 'arrow' in key:
             action = self.xdotool_change_desktop(key)
             return action
-        return None
+        else:
+            action = self.create_xdotol_command(key)
+        return action
 
     def listen(self):
         cmd = None
